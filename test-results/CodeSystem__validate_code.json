@@ -1,0 +1,30 @@
+{
+  "testName": "CodeSystem_$validate-code",
+  "timestamp": "2025-09-09T22:19:04.206Z",
+  "status": "success",
+  "response": {
+    "resourceType": "Parameters",
+    "parameter": [
+      {
+        "name": "result",
+        "valueBoolean": false
+      },
+      {
+        "name": "code",
+        "valueCode": "TM26.0"
+      },
+      {
+        "name": "system",
+        "valueUri": "https://icd.who.int/browse11/l-m/en"
+      },
+      {
+        "name": "version",
+        "valueString": "1.0"
+      },
+      {
+        "name": "message",
+        "valueString": "Code 'TM26.0' not found in CodeSystem 'ICD-11'"
+      }
+    ]
+  }
+}

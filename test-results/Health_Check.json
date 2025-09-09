@@ -1,0 +1,11 @@
+{
+  "testName": "Health_Check",
+  "timestamp": "2025-09-09T22:19:00.150Z",
+  "status": "success",
+  "response": {
+    "status": "healthy",
+    "timestamp": "2025-09-09T22:19:00.130Z",
+    "version": "1.0.0",
+    "service": "AyushBridge FHIR Backend"
+  }
+}

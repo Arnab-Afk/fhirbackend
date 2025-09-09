@@ -1,0 +1,30 @@
+{
+  "testName": "Patient_Read",
+  "timestamp": "2025-09-09T22:19:13.527Z",
+  "status": "success",
+  "response": {
+    "resourceType": "Patient",
+    "id": "cmfcyyvdq000nsrbpolnzwz9l",
+    "active": true,
+    "name": [
+      {
+        "use": "official",
+        "family": "Sharma",
+        "given": [
+          "Rajesh"
+        ],
+        "prefix": [],
+        "suffix": []
+      }
+    ],
+    "identifier": [
+      {
+        "use": "usual",
+        "system": "https://ndhm.gov.in/id",
+        "value": "PAT001"
+      }
+    ],
+    "gender": "male",
+    "birthDate": "1980-01-01"
+  }
+}

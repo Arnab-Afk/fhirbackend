@@ -1,0 +1,40 @@
+{
+  "testName": "CodeSystem_Read",
+  "timestamp": "2025-09-09T22:19:03.619Z",
+  "status": "success",
+  "response": {
+    "resourceType": "CodeSystem",
+    "id": "cmfczhlzp0000hb97kd26fpkb",
+    "url": "https://icd.who.int/browse11/l-m/en",
+    "version": null,
+    "name": "ICD-11",
+    "title": "International Classification of Diseases 11th Revision",
+    "status": "active",
+    "experimental": false,
+    "publisher": null,
+    "description": "WHO International Classification of Diseases, 11th Revision",
+    "content": "complete",
+    "supplements": null,
+    "count": 1,
+    "caseSensitive": false,
+    "compositional": false,
+    "versionNeeded": false,
+    "concept": [
+      {
+        "code": "include couch potato",
+        "display": "slacker",
+        "definition": "and bludger. Related concepts include sloth",
+        "designation": [
+          {
+            "language": "en",
+            "use": {
+              "code": "synonym",
+              "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+            },
+            "value": "abulia"
+          }
+        ]
+      }
+    ]
+  }
+}

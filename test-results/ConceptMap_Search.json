@@ -1,0 +1,162 @@
+{
+  "testName": "ConceptMap_Search",
+  "timestamp": "2025-09-09T22:19:06.006Z",
+  "status": "success",
+  "response": {
+    "resourceType": "Bundle",
+    "type": "searchset",
+    "total": 3,
+    "entry": [
+      {
+        "resource": {
+          "resourceType": "ConceptMap",
+          "id": "cmfczxllt0008pau5rukzh1x2",
+          "url": "https://ayush.gov.in/fhir/ConceptMap/unani-to-icd11-tm2",
+          "version": null,
+          "name": "unani-to-icd11-tm2",
+          "title": "Unani to ICD-11 TM2 Mapping",
+          "status": "active",
+          "experimental": false,
+          "publisher": null,
+          "description": "Mapping between Unani and ICD-11 Traditional Medicine terminology",
+          "sourceUri": "https://ayush.gov.in/fhir/CodeSystem/unani",
+          "targetUri": "http://id.who.int/icd/release/11/mms",
+          "group": [
+            {
+              "source": "https://ayush.gov.in/fhir/CodeSystem/unani",
+              "target": "http://id.who.int/icd/release/11/mms",
+              "element": [
+                {
+                  "code": "A-2",
+                  "display": "شقيقہ",
+                  "target": [
+                    {
+                      "code": "SK01",
+                      "display": "Migraine disorder",
+                      "equivalence": "equivalent",
+                      "comment": "Shaqeeqa (migraine) maps to migraine disorder",
+                      "dependsOn": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "ConceptMap",
+          "id": "cmfczxkcw0000pau5h8g5h76g",
+          "url": "https://ayush.gov.in/fhir/ConceptMap/namaste-to-icd11-tm2",
+          "version": null,
+          "name": "namaste-to-icd11-tm2",
+          "title": "NAMASTE to ICD-11 TM2 Mapping",
+          "status": "active",
+          "experimental": false,
+          "publisher": null,
+          "description": "Mapping between NAMASTE and ICD-11 Traditional Medicine terminology",
+          "sourceUri": "https://ayush.gov.in/fhir/CodeSystem/namaste",
+          "targetUri": "http://id.who.int/icd/release/11/mms",
+          "group": [
+            {
+              "source": "https://ayush.gov.in/fhir/CodeSystem/namaste",
+              "target": "http://id.who.int/icd/release/11/mms",
+              "element": [
+                {
+                  "code": "SR11",
+                  "display": "वातसञ्चयः",
+                  "target": [
+                    {
+                      "code": "TM26.0",
+                      "display": "Disorders of vata dosha",
+                      "equivalence": "equivalent",
+                      "comment": "Vata accumulation maps to vata dosha disorders",
+                      "dependsOn": []
+                    }
+                  ]
+                },
+                {
+                  "code": "SR12",
+                  "display": "वातवृद्धिः",
+                  "target": [
+                    {
+                      "code": "TM26.0",
+                      "display": "Disorders of vata dosha",
+                      "equivalence": "equivalent",
+                      "comment": "Vata increase maps to vata dosha disorders",
+                      "dependsOn": []
+                    }
+                  ]
+                },
+                {
+                  "code": "SR16",
+                  "display": "पित्तसञ्चयः",
+                  "target": [
+                    {
+                      "code": "TM27.0",
+                      "display": "Disorders of pitta dosha",
+                      "equivalence": "equivalent",
+                      "comment": "Pitta accumulation maps to pitta dosha disorders",
+                      "dependsOn": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "ConceptMap",
+          "id": "cmfcyyupm000csrbpcvmw0ww7",
+          "url": "https://ayush.gov.in/fhir/ConceptMap/namaste-to-icd11",
+          "version": null,
+          "name": "namaste-to-icd11",
+          "title": "NAMASTE to ICD-11 TM2 Mapping",
+          "status": "active",
+          "experimental": false,
+          "publisher": null,
+          "description": "Mapping between NAMASTE and ICD-11 Traditional Medicine codes",
+          "sourceUri": "https://ayush.gov.in/fhir/CodeSystem/namaste",
+          "targetUri": "http://id.who.int/icd/release/11/mms",
+          "group": [
+            {
+              "source": "https://ayush.gov.in/fhir/CodeSystem/namaste",
+              "target": "http://id.who.int/icd/release/11/mms",
+              "element": [
+                {
+                  "code": "NAM001",
+                  "display": "Amavata",
+                  "target": [
+                    {
+                      "code": "TM26.0",
+                      "display": "Disorders of vata dosha",
+                      "equivalence": "equivalent",
+                      "comment": null,
+                      "dependsOn": []
+                    }
+                  ]
+                },
+                {
+                  "code": "NAM002",
+                  "display": "Prameha",
+                  "target": [
+                    {
+                      "code": "TM27.0",
+                      "display": "Disorders of pitta dosha",
+                      "equivalence": "relatedto",
+                      "comment": null,
+                      "dependsOn": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

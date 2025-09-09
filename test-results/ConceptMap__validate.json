@@ -1,0 +1,18 @@
+{
+  "testName": "ConceptMap_$validate",
+  "timestamp": "2025-09-09T22:19:07.637Z",
+  "status": "success",
+  "response": {
+    "resourceType": "Parameters",
+    "parameter": [
+      {
+        "name": "result",
+        "valueBoolean": false
+      },
+      {
+        "name": "message",
+        "valueString": "No valid mapping found for concept 'SR11' to target system"
+      }
+    ]
+  }
+}

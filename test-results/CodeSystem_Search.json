@@ -1,0 +1,552 @@
+{
+  "testName": "CodeSystem_Search",
+  "timestamp": "2025-09-09T22:19:02.829Z",
+  "status": "success",
+  "response": {
+    "resourceType": "Bundle",
+    "type": "searchset",
+    "total": 4,
+    "entry": [
+      {
+        "resource": {
+          "resourceType": "CodeSystem",
+          "id": "cmfczhlzp0000hb97kd26fpkb",
+          "url": "https://icd.who.int/browse11/l-m/en",
+          "version": null,
+          "name": "ICD-11",
+          "title": "International Classification of Diseases 11th Revision",
+          "status": "active",
+          "experimental": false,
+          "publisher": null,
+          "description": "WHO International Classification of Diseases, 11th Revision",
+          "content": "complete",
+          "supplements": null,
+          "count": 1,
+          "caseSensitive": false,
+          "compositional": false,
+          "versionNeeded": false,
+          "concept": [
+            {
+              "code": "include couch potato",
+              "display": "slacker",
+              "definition": "and bludger. Related concepts include sloth",
+              "designation": [
+                {
+                  "language": "en",
+                  "use": {
+                    "code": "synonym",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "abulia"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "CodeSystem",
+          "id": "cmfcyyugq0007srbpohh1o7s9",
+          "url": "http://id.who.int/icd/release/11/mms",
+          "version": null,
+          "name": "ICD11-TM2",
+          "title": "ICD-11 Traditional Medicine Module 2",
+          "status": "active",
+          "experimental": false,
+          "publisher": null,
+          "description": "WHO ICD-11 Traditional Medicine classifications",
+          "content": "complete",
+          "supplements": null,
+          "count": 646,
+          "caseSensitive": false,
+          "compositional": false,
+          "versionNeeded": false,
+          "concept": [
+            {
+              "code": "TM26.0",
+              "display": "Disorders of vata dosha",
+              "definition": null,
+              "designation": []
+            },
+            {
+              "code": "TM27.0",
+              "display": "Disorders of pitta dosha",
+              "definition": null,
+              "designation": []
+            },
+            {
+              "code": "SK00",
+              "display": "- - - - Headache disorders (TM2)",
+              "definition": "Skipped - Not a specific disease",
+              "designation": []
+            },
+            {
+              "code": "SK01",
+              "display": "Migraine disorder",
+              "definition": "Migraine is a complex neurological disorder characterized by episodes of moderate-to-severe headache, most often unilateral and generally associated with nausea, and light and sound sensitivity. Other characterizing symptoms may include vomiting, cognitive dysfunction, allodynia, and dizziness. Exacerbation or worsening of headache symptoms during physical activity is another distinguishing feature. (Source: Migraine)",
+              "designation": [
+                {
+                  "language": "en",
+                  "use": {
+                    "code": "synonym",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "migraine"
+                }
+              ]
+            },
+            {
+              "code": "SK0Y",
+              "display": "headache disorders",
+              "definition": "A headache, also known as cephalalgia, is the symptom of pain in the face, head, or neck. (Source: Headache)",
+              "designation": [
+                {
+                  "language": "en",
+                  "use": {
+                    "code": "synonym",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "headache"
+                }
+              ]
+            },
+            {
+              "code": "SK0Z",
+              "display": "Headache disorders (TM2),",
+              "definition": "A headache, also known as cephalalgia, is the symptom of pain in the face, head, or neck. (Source: Headache)",
+              "designation": [
+                {
+                  "language": "en",
+                  "use": {
+                    "code": "synonym",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "headache"
+                },
+                {
+                  "language": "en",
+                  "use": {
+                    "code": "synonym",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "(tm2)"
+                }
+              ]
+            },
+            {
+              "code": "SK10",
+              "display": "Vertigo and giddiness disorder",
+              "definition": "It can also refer to disequilibrium or a non-specific feeling, such as giddiness or foolishness. (Source: Dizziness)",
+              "designation": [
+                {
+                  "language": "en",
+                  "use": {
+                    "code": "synonym",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "vertigo"
+                },
+                {
+                  "language": "en",
+                  "use": {
+                    "code": "synonym",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "giddiness"
+                }
+              ]
+            },
+            {
+              "code": "SK1Y",
+              "display": "nervous system disorders",
+              "definition": "Nervous system diseases, also known as nervous system or neurological disorders, refers to a small class of medical conditions affecting the nervous system. This category encompasses over 600 different conditions, including genetic disorders, infections, cancer, seizure disorders, conditions with a cardiovascular origin, congenital and developmental disorders, and degenerative disorders. (Source: Nervous system disease)",
+              "designation": [
+                {
+                  "language": "en",
+                  "use": {
+                    "code": "synonym",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "nervous system"
+                }
+              ]
+            },
+            {
+              "code": "SK1Z",
+              "display": "Nervous system disorders (TM2),",
+              "definition": "In biology, the nervous system is the highly complex part of an animal that coordinates its actions and sensory information by transmitting signals to and from different parts of its body. Nerves that transmit signals from the brain are called motor nerves (efferent), while those nerves that transmit information from the body to the CNS are called sensory nerves (afferent). (Source: Nervous system)",
+              "designation": [
+                {
+                  "language": "en",
+                  "use": {
+                    "code": "synonym",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "nervous system"
+                },
+                {
+                  "language": "en",
+                  "use": {
+                    "code": "synonym",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "(tm2)"
+                }
+              ]
+            },
+            {
+              "code": "SK20",
+              "display": "Facial palsy disorder",
+              "definition": "The pathway of the facial nerve is long and relatively convoluted, so there are a number of causes that may result in facial nerve paralysis. The most common is Bell's palsy, a disease of unknown cause that may only be diagnosed by exclusion of identifiable serious causes. (Source: Facial nerve paralysis)",
+              "designation": [
+                {
+                  "language": "en",
+                  "use": {
+                    "code": "synonym",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "facial"
+                },
+                {
+                  "language": "en",
+                  "use": {
+                    "code": "synonym",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "palsy"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "CodeSystem",
+          "id": "cmfcz4ytd0000q19ju46acvl3",
+          "url": "https://ayush.gov.in/fhir/CodeSystem/unani",
+          "version": null,
+          "name": "UNANI",
+          "title": "Unani Medicine Terminology",
+          "status": "active",
+          "experimental": false,
+          "publisher": null,
+          "description": "Standardized terminologies for Unani medicine",
+          "content": "complete",
+          "supplements": null,
+          "count": 338,
+          "caseSensitive": false,
+          "compositional": false,
+          "versionNeeded": false,
+          "concept": [
+            {
+              "code": "O-6",
+              "display": "رطوبت غریزیہ",
+              "definition": "The moistness of an organ which remains in equilibrium, qualitatively and quantitatively, in accordance to the temperament of that organ.",
+              "designation": [
+                {
+                  "language": "ar",
+                  "use": {
+                    "code": "display",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "رطوبت غریزیہ"
+                }
+              ]
+            },
+            {
+              "code": "UM",
+              "display": "UM",
+              "definition": "Unani Medicine",
+              "designation": []
+            },
+            {
+              "code": "UM-DIS",
+              "display": "UM-DIS",
+              "definition": "Disorders",
+              "designation": []
+            },
+            {
+              "code": "A",
+              "display": "امراض نظام اعصاب و دماغ",
+              "definition": "Diseases of Nervous System",
+              "designation": [
+                {
+                  "language": "ar",
+                  "use": {
+                    "code": "display",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "امراض نظام اعصاب و دماغ"
+                }
+              ]
+            },
+            {
+              "code": "A-1",
+              "display": "بيضہ و خوذہ",
+              "definition": "A severe type of chronic headache which involves the whole head. The patient feels that someone is hammering his head. Most of the physicians are of the view that both these types are same but <em>Dā’ūd Anṭākī</em> differentiates them by the site of pain as <em>Bayḍa</em> is a headache which occurs in the central part of head while <em>Khūdha</em> is a headache which is experienced on the periphery of head.",
+              "designation": [
+                {
+                  "language": "ar",
+                  "use": {
+                    "code": "display",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "بيضہ و خوذہ"
+                }
+              ]
+            },
+            {
+              "code": "A-2",
+              "display": "شقيقہ",
+              "definition": "A type of severe headache which involves one half of head whether it is right or left. It is an episodic type of pain accompanied with nausea and vomiting.",
+              "designation": [
+                {
+                  "language": "ar",
+                  "use": {
+                    "code": "display",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "شقيقہ"
+                }
+              ]
+            },
+            {
+              "code": "A-2.1",
+              "display": "شقيقہ حارہ",
+              "definition": "A type of migraine which is caused by predominance of <em>Ṣafrā’</em> (yellow bile) and <em>Dam</em> (blood/sanguine) in the body.",
+              "designation": [
+                {
+                  "language": "ar",
+                  "use": {
+                    "code": "display",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "شقيقہ حارہ"
+                }
+              ]
+            },
+            {
+              "code": "A-2.2",
+              "display": "شقيقہ باردہ",
+              "definition": "A type of migraine which is caused by predominance of <em>Balgham</em> (phlegm) and <em>Sawdā’</em> (black bile) in the body.",
+              "designation": [
+                {
+                  "language": "ar",
+                  "use": {
+                    "code": "display",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "شقيقہ باردہ"
+                }
+              ]
+            },
+            {
+              "code": "A-3",
+              "display": "عصابہ",
+              "definition": "It is a type of severe headache which occurs on the forehead above the eyebrow. It can involve either sides or both sides. The intensity of pain gradually reduces with the sunset.",
+              "designation": [
+                {
+                  "language": "ar",
+                  "use": {
+                    "code": "display",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "عصابہ"
+                }
+              ]
+            },
+            {
+              "code": "A-4",
+              "display": "حس دماغ",
+              "definition": "sensation of itching in brain",
+              "designation": [
+                {
+                  "language": "ar",
+                  "use": {
+                    "code": "display",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "حس دماغ"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "CodeSystem",
+          "id": "cmfcyytj10000srbp2as56xqh",
+          "url": "https://ayush.gov.in/fhir/CodeSystem/namaste",
+          "version": null,
+          "name": "NAMASTE",
+          "title": "National AYUSH Morbidity & Standardized Terminologies Electronic",
+          "status": "active",
+          "experimental": false,
+          "publisher": null,
+          "description": "Standardized terminologies for Ayurveda, Siddha, and Unani disorders",
+          "content": "complete",
+          "supplements": null,
+          "count": 3490,
+          "caseSensitive": false,
+          "compositional": false,
+          "versionNeeded": false,
+          "concept": [
+            {
+              "code": "NAM001",
+              "display": "Amavata",
+              "definition": "Rheumatoid arthritis in Ayurvedic terms",
+              "designation": [
+                {
+                  "language": "hi",
+                  "use": {
+                    "code": "display",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "आमवात"
+                }
+              ]
+            },
+            {
+              "code": "NAM002",
+              "display": "Prameha",
+              "definition": "Diabetes mellitus in Ayurvedic terms",
+              "designation": [
+                {
+                  "language": "hi",
+                  "use": {
+                    "code": "display",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "प्रमेह"
+                }
+              ]
+            },
+            {
+              "code": "SR11 (AAA-1)",
+              "display": "वातसञ्चयः",
+              "definition": "It is characterized by impaired movements of vāta, fullness of abdomen and aversion to factors causing of increase of vāta such as cold. This may be explained by accumulation of vatadosha at the designated site to a moderate level resulting in accumulation.",
+              "designation": [
+                {
+                  "language": "sa",
+                  "use": {
+                    "code": "display",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "वातसञ्चयः"
+                }
+              ]
+            },
+            {
+              "code": "SR12 (AAA-2)",
+              "display": "वातवृद्धिः",
+              "definition": "It is characterized by roughness or hoarseness of voice, emaciation, blackish discoloration of body, twitching in various parts of body, desire for warmth, insomnia, reduced physical strength, hard stools. This may be explained by marked increase of vatadosha functions and consequent physiological and pathological ramifications.",
+              "designation": [
+                {
+                  "language": "sa",
+                  "use": {
+                    "code": "display",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "वातवृद्धिः"
+                }
+              ]
+            },
+            {
+              "code": "SR10  (AAA-2.1)",
+              "display": "वातप्रकोपः",
+              "definition": "It is characterized by abdominal pain and increased gaseous movements in abdomen. This may be explained by aggravation of vatadosha at its designated site and preparing to cause certain morbidity.",
+              "designation": [
+                {
+                  "language": "sa",
+                  "use": {
+                    "code": "display",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "वातप्रकोपः"
+                }
+              ]
+            },
+            {
+              "code": "AAA-2.2",
+              "display": "प्राणवातकोपः",
+              "definition": "the disorder is characterized by hikkā [hiccup], śvāsa [breathlessness/difficult breathing], cakṣurādīnāmupaghāta [impairment of sense organs viz. eye], pīnasa [cold, catarrh], ardita [facial paralysis], tr̥ṭ [thirst], kāsaḥ [cough]",
+              "designation": [
+                {
+                  "language": "sa",
+                  "use": {
+                    "code": "display",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "प्राणवातकोपः"
+                }
+              ]
+            },
+            {
+              "code": "AAA-2.3",
+              "display": "उदानवातकोपः",
+              "definition": "the disorder is characterized by kaṇṭharōdha [choking of throat/stopping or lowering voice], manōbhraṁśa [mental disturbance], chardiḥ [vomiting], arōcakaḥ [tastelessness], pīnasa [cold, catarrh], galagaṇḍaḥ [glandular swelling in jaw, neck and throat region /goitre], jatrūrdhvarōga [diseases of body above collar bone/diseases of head and neck]",
+              "designation": [
+                {
+                  "language": "sa",
+                  "use": {
+                    "code": "display",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "उदानवातकोपः"
+                }
+              ]
+            },
+            {
+              "code": "AAA-2.4",
+              "display": "व्यानवातकोपः",
+              "definition": "the disorder is characterized by puṁstvabhraṁśa [decrease in virility/semen], utsāhabhraṁśa [decrease/lack of enthusiasm/energy], balabhraṁśaḥ [diminution of physical strength], śōpha [oedema], cittōtplava [excitement], jvaraḥ [fever], sarvāṅgarōga [quadriplegia], nistōda [pricking type of pain], rōmaharṣa [horripilation], aṅgasuptatā [numbness of body parts], kuṣṭhaḥ [skin disease], visarpa [spreading cellulitis/erysipelas], sarvāṅgaga rōga [diseases affecting whole body]",
+              "designation": [
+                {
+                  "language": "sa",
+                  "use": {
+                    "code": "display",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "व्यानवातकोपः"
+                }
+              ]
+            },
+            {
+              "code": "AAA-2.5",
+              "display": "समानवातकोपः",
+              "definition": "the disorder is characterized by gulmaḥ [palpable glandular enlargment in abdomen/abdominal lump], agnisādaḥ [diminution of agni (digestive power)], atisāra [diarrhoea], śūla [colicky pain in the abdomen], grahaṇī [derangement of agni situated in grahaṇī], pakvāśayajarōga [diseases of/having origin in pakvāśaya], āmāśayajarōgaḥ [diseases of/having origin in āmāśaya]",
+              "designation": [
+                {
+                  "language": "sa",
+                  "use": {
+                    "code": "display",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "समानवातकोपः"
+                }
+              ]
+            },
+            {
+              "code": "AAA-2.6",
+              "display": "अपानवातकोपः",
+              "definition": "the disorder is characterized by pakvāśayāśrayarōgaḥ [diseases of pakvāśaya], mūtrapradōṣaḥ [disorders of mūtra/urinary system], śukrapradōṣaḥ [disorders of semen], arśaḥ [haemorrhoids], gudabhraṁśaḥ [rectal prolapse]",
+              "designation": [
+                {
+                  "language": "sa",
+                  "use": {
+                    "code": "display",
+                    "system": "http://terminology.hl7.org/CodeSystem/designation-usage"
+                  },
+                  "value": "अपानवातकोपः"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

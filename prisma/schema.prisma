@@ -1,0 +1,320 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model CodeSystem {
+  id          String   @id @default(cuid())
+  url         String   @unique
+  version     String?
+  name        String?
+  title       String?
+  status      String   @default("active") // draft | active | retired | unknown
+  experimental Boolean @default(false)
+  date        DateTime?
+  publisher   String?
+  description String?
+  content     String   @default("complete") // not-present | example | fragment | complete | supplement
+  supplements String?
+  count       Int?
+
+  // FHIR specific fields
+  caseSensitive Boolean @default(false)
+  compositional Boolean @default(false)
+  versionNeeded Boolean @default(false)
+
+  concepts CodeSystemConcept[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CodeSystemConcept {
+  id            String   @id @default(cuid())
+  code          String
+  display       String?
+  definition    String?
+  codeSystemId  String
+  codeSystem    CodeSystem @relation(fields: [codeSystemId], references: [id], onDelete: Cascade)
+
+  // Hierarchical relationships
+  parentId      String?
+  parent        CodeSystemConcept? @relation("ConceptHierarchy", fields: [parentId], references: [id])
+  children      CodeSystemConcept[] @relation("ConceptHierarchy")
+
+  // Properties
+  properties    Json? // Store additional properties as JSON
+
+  // Designations for multilingual support
+  designations  CodeSystemDesignation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([codeSystemId, code])
+}
+
+model CodeSystemDesignation {
+  id        String   @id @default(cuid())
+  language  String
+  use       Json? // Coding for designation use
+  value     String
+  conceptId String
+  concept   CodeSystemConcept @relation(fields: [conceptId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ConceptMap {
+  id          String   @id @default(cuid())
+  url         String   @unique
+  version     String?
+  name        String?
+  title       String?
+  status      String   @default("active")
+  experimental Boolean @default(false)
+  date        DateTime?
+  publisher   String?
+  description String?
+
+  // Source and target code systems
+  sourceUri   String?
+  targetUri   String?
+
+  // Mapping groups
+  groups      ConceptMapGroup[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ConceptMapGroup {
+  id           String   @id @default(cuid())
+  source       String?
+  target       String?
+  conceptMapId String
+  conceptMap   ConceptMap @relation(fields: [conceptMapId], references: [id], onDelete: Cascade)
+
+  elements     ConceptMapElement[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ConceptMapElement {
+  id        String   @id @default(cuid())
+  code      String?
+  display   String?
+  groupId   String
+  group     ConceptMapGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  targets   ConceptMapTarget[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ConceptMapTarget {
+  id         String   @id @default(cuid())
+  code       String?
+  display    String?
+  equivalence String  @default("equivalent") // relatedto | equivalent | equal | wider | subsumes | narrower | specializes | inexact | unmatched | disjoint
+  comment    String?
+  elementId  String
+  element    ConceptMapElement @relation(fields: [elementId], references: [id], onDelete: Cascade)
+
+  // Additional properties
+  dependsOn  ConceptMapDependsOn[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ConceptMapDependsOn {
+  id       String   @id @default(cuid())
+  property String
+  system   String?
+  value    String
+  display  String?
+  targetId String
+  target   ConceptMapTarget @relation(fields: [targetId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ValueSet {
+  id          String   @id @default(cuid())
+  url         String   @unique
+  version     String?
+  name        String?
+  title       String?
+  status      String   @default("active")
+  experimental Boolean @default(false)
+  date        DateTime?
+  publisher   String?
+  description String?
+
+  // Value set composition
+  compose     Json? // Store compose rules as JSON
+
+  // Expansion (for pre-computed expansions)
+  expansion   Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Patient {
+  id          String   @id @default(cuid())
+  active      Boolean? @default(true)
+  gender      String? // male | female | other | unknown
+  birthDate   DateTime?
+
+  // Names
+  names       PatientName[]
+
+  // Identifiers
+  identifiers PatientIdentifier[]
+
+  // Conditions
+  conditions  Condition[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PatientName {
+  id        String   @id @default(cuid())
+  use       String? // usual | official | temp | nickname | anonymous | old | maiden
+  family    String?
+  given     String[]
+  prefix    String[]
+  suffix    String[]
+  patientId String
+  patient   Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PatientIdentifier {
+  id        String   @id @default(cuid())
+  use       String? // usual | official | temp | secondary | old
+  system    String?
+  value     String
+  patientId String
+  patient   Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Condition {
+  id          String   @id @default(cuid())
+
+  // Clinical status
+  clinicalStatus Json? // Coding for clinical status
+
+  // Verification status
+  verificationStatus Json? // Coding for verification status
+
+  // Category
+  category    Json[] // Array of Codings
+
+  // Severity
+  severity    Json? // Coding
+
+  // Code (diagnosis)
+  code        Json // Coding for the condition
+
+  // Body site
+  bodySite    Json[] // Array of Codings
+
+  // Subject (patient)
+  subjectId   String
+  subject     Patient @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  // Encounter
+  encounterId String?
+
+  // Onset
+  onsetDateTime DateTime?
+  onsetAge     Json?
+  onsetPeriod  Json?
+  onsetRange   Json?
+  onsetString  String?
+
+  // Abatement
+  abatementDateTime DateTime?
+  abatementAge     Json?
+  abatementPeriod  Json?
+  abatementRange   Json?
+  abatementString  String?
+
+  // Recorded date
+  recordedDate DateTime?
+
+  // Recorder
+  recorder    Json?
+
+  // Asserter
+  asserter    Json?
+
+  // Stage
+  stage       Json[]
+
+  // Evidence
+  evidence    Json[]
+
+  // Note
+  note        Json[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AuditEvent {
+  id          String   @id @default(cuid())
+
+  // Event type
+  type        Json // Coding
+
+  // Event subtypes
+  subtype     Json[] // Array of Codings
+
+  // Action performed
+  action      String? // C | R | U | D | E
+
+  // When the event occurred
+  recorded    DateTime @default(now())
+
+  // Outcome of the event
+  outcome     String? // 0 | 4 | 8 | 12
+  outcomeDesc String?
+
+  // Purpose of event
+  purposeOfEvent Json[] // Array of Codings
+
+  // Agent (who performed the action)
+  agent       Json[]
+
+  // Source (system that reported the event)
+  source      Json
+
+  // Entity (what was acted upon)
+  entity      Json[]
+
+  // Details
+  details     Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

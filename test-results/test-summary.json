@@ -1,0 +1,90 @@
+{
+  "summary": {
+    "total": 16,
+    "passed": 16,
+    "failed": 0,
+    "errors": []
+  },
+  "details": {
+    "Health Check": {
+      "success": true,
+      "error": null,
+      "timestamp": "2025-09-09T22:19:00.153Z"
+    },
+    "Capability Statement": {
+      "success": true,
+      "error": null,
+      "timestamp": "2025-09-09T22:19:00.206Z"
+    },
+    "CodeSystem Search": {
+      "success": true,
+      "error": null,
+      "timestamp": "2025-09-09T22:19:02.832Z"
+    },
+    "CodeSystem Read": {
+      "success": true,
+      "error": null,
+      "timestamp": "2025-09-09T22:19:03.620Z"
+    },
+    "CodeSystem $lookup": {
+      "success": true,
+      "error": null,
+      "timestamp": "2025-09-09T22:19:04.009Z"
+    },
+    "CodeSystem $validate-code": {
+      "success": true,
+      "error": null,
+      "timestamp": "2025-09-09T22:19:04.207Z"
+    },
+    "ConceptMap Search": {
+      "success": true,
+      "error": null,
+      "timestamp": "2025-09-09T22:19:06.007Z"
+    },
+    "ConceptMap Read": {
+      "success": true,
+      "error": null,
+      "timestamp": "2025-09-09T22:19:06.890Z"
+    },
+    "ConceptMap $translate": {
+      "success": true,
+      "error": null,
+      "timestamp": "2025-09-09T22:19:07.328Z"
+    },
+    "ConceptMap $validate": {
+      "success": true,
+      "error": null,
+      "timestamp": "2025-09-09T22:19:07.638Z"
+    },
+    "ValueSet Search": {
+      "success": true,
+      "error": null,
+      "timestamp": "2025-09-09T22:19:08.882Z"
+    },
+    "Condition Search": {
+      "success": true,
+      "error": null,
+      "timestamp": "2025-09-09T22:19:11.024Z"
+    },
+    "Condition Read": {
+      "success": true,
+      "error": null,
+      "timestamp": "2025-09-09T22:19:11.566Z"
+    },
+    "Patient Search": {
+      "success": true,
+      "error": null,
+      "timestamp": "2025-09-09T22:19:13.000Z"
+    },
+    "Patient Read": {
+      "success": true,
+      "error": null,
+      "timestamp": "2025-09-09T22:19:13.529Z"
+    },
+    "AuditEvent Search": {
+      "success": true,
+      "error": null,
+      "timestamp": "2025-09-09T22:19:14.501Z"
+    }
+  }
+}

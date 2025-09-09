@@ -1,0 +1,40 @@
+{
+  "testName": "ConceptMap_Read",
+  "timestamp": "2025-09-09T22:19:06.889Z",
+  "status": "success",
+  "response": {
+    "resourceType": "ConceptMap",
+    "id": "cmfczxllt0008pau5rukzh1x2",
+    "url": "https://ayush.gov.in/fhir/ConceptMap/unani-to-icd11-tm2",
+    "version": null,
+    "name": "unani-to-icd11-tm2",
+    "title": "Unani to ICD-11 TM2 Mapping",
+    "status": "active",
+    "experimental": false,
+    "publisher": null,
+    "description": "Mapping between Unani and ICD-11 Traditional Medicine terminology",
+    "sourceUri": "https://ayush.gov.in/fhir/CodeSystem/unani",
+    "targetUri": "http://id.who.int/icd/release/11/mms",
+    "group": [
+      {
+        "source": "https://ayush.gov.in/fhir/CodeSystem/unani",
+        "target": "http://id.who.int/icd/release/11/mms",
+        "element": [
+          {
+            "code": "A-2",
+            "display": "شقيقہ",
+            "target": [
+              {
+                "code": "SK01",
+                "display": "Migraine disorder",
+                "equivalence": "equivalent",
+                "comment": "Shaqeeqa (migraine) maps to migraine disorder",
+                "dependsOn": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

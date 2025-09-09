@@ -1,0 +1,45 @@
+{
+  "name": "fhirbackend",
+  "version": "1.0.0",
+  "description": "FHIR R4 Compliant Backend for NAMASTE & ICD-11 TM2 Integration",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio",
+    "db:setup": "node scripts/setupDatabase.js",
+    "db:test": "node scripts/testDatabase.js",
+    "test": "jest"
+  },
+  "keywords": [
+    "fhir",
+    "healthcare",
+    "namaste",
+    "icd11",
+    "express"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "axios": "^1.11.0",
+    "compression": "^1.8.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.1",
+    "pg": "^8.16.3",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.0",
+    "prisma": "^5.22.0"
+  }
+}

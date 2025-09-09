@@ -1,0 +1,137 @@
+{
+  "testName": "Condition_Search",
+  "timestamp": "2025-09-09T22:19:11.023Z",
+  "status": "success",
+  "response": {
+    "resourceType": "Bundle",
+    "type": "searchset",
+    "total": 4,
+    "entry": [
+      {
+        "resource": {
+          "resourceType": "Condition",
+          "id": "cmfczxmbw000dpau5e6vdcsii",
+          "clinicalStatus": {
+            "code": "active"
+          },
+          "verificationStatus": {
+            "code": "confirmed"
+          },
+          "category": [
+            {
+              "code": "encounter-diagnosis"
+            }
+          ],
+          "severity": null,
+          "code": {
+            "code": "SK01",
+            "system": "http://id.who.int/icd/release/11/mms",
+            "display": "Migraine disorder"
+          },
+          "bodySite": [],
+          "subject": {
+            "reference": "Patient/cmfcyyvdq000nsrbpolnzwz9l",
+            "display": "Rajesh Sharma"
+          },
+          "recordedDate": "2025-09-09T20:21:34.401Z"
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "Condition",
+          "id": "cmfczxmgz000fpau5pd1o2ufh",
+          "clinicalStatus": {
+            "code": "active"
+          },
+          "verificationStatus": {
+            "code": "confirmed"
+          },
+          "category": [
+            {
+              "code": "encounter-diagnosis"
+            }
+          ],
+          "severity": null,
+          "code": {
+            "code": "SL40",
+            "system": "http://id.who.int/icd/release/11/mms",
+            "display": "Bronchial asthma disorder"
+          },
+          "bodySite": [],
+          "subject": {
+            "reference": "Patient/cmfcyyvdq000nsrbpolnzwz9l",
+            "display": "Rajesh Sharma"
+          },
+          "recordedDate": "2025-09-09T20:21:34.401Z"
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "Condition",
+          "id": "cmfczxmjg000hpau5k3wk7n3m",
+          "clinicalStatus": {
+            "code": "active"
+          },
+          "verificationStatus": {
+            "code": "confirmed"
+          },
+          "category": [
+            {
+              "code": "encounter-diagnosis"
+            }
+          ],
+          "severity": null,
+          "code": {
+            "code": "SR11",
+            "system": "https://ayush.gov.in/fhir/CodeSystem/namaste",
+            "display": "वातसञ्चयः"
+          },
+          "bodySite": [],
+          "subject": {
+            "reference": "Patient/cmfcyyvdq000nsrbpolnzwz9l",
+            "display": "Rajesh Sharma"
+          },
+          "recordedDate": "2025-09-09T20:21:34.401Z"
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "Condition",
+          "id": "cmfcyyvrd000tsrbpu55asgae",
+          "clinicalStatus": {
+            "coding": [
+              {
+                "code": "active",
+                "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                "display": "Active"
+              }
+            ]
+          },
+          "verificationStatus": null,
+          "category": [],
+          "severity": null,
+          "code": {
+            "coding": [
+              {
+                "code": "NAM001",
+                "system": "https://ayush.gov.in/fhir/CodeSystem/namaste",
+                "display": "Amavata"
+              },
+              {
+                "code": "TM26.0",
+                "system": "http://id.who.int/icd/release/11/mms",
+                "display": "Disorders of vata dosha"
+              }
+            ]
+          },
+          "bodySite": [],
+          "subject": {
+            "reference": "Patient/cmfcyyvdq000nsrbpolnzwz9l",
+            "display": "Rajesh Sharma"
+          },
+          "recordedDate": "2025-09-09T19:54:33.671Z"
+        }
+      }
+    ]
+  }
+}

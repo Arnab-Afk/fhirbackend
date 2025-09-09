@@ -1,0 +1,408 @@
+{
+  "info": {
+    "name": "FHIR R4 Backend - NAMASTE & ICD-11 TM2",
+    "description": "Complete API collection for testing FHIR R4 backend with TM2 terminology services",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/fhir",
+      "type": "string"
+    },
+    {
+      "key": "icd11Tm2Id",
+      "value": "cmfcyyugq0007srbpohh1o7s9",
+      "type": "string"
+    },
+    {
+      "key": "namasteId",
+      "value": "cmfcyytj10000srbp2as56xqh",
+      "type": "string"
+    },
+    {
+      "key": "namasteToIcdMapId",
+      "value": "cmfczxkcw0000pau5h8g5h76g",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "System",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/../health",
+              "host": ["{{baseUrl}}"],
+              "path": ["..", "health"]
+            }
+          }
+        },
+        {
+          "name": "Capability Statement",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/metadata",
+              "host": ["{{baseUrl}}"],
+              "path": ["metadata"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "CodeSystem",
+      "item": [
+        {
+          "name": "Search CodeSystems",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/CodeSystem?name=ICD11-TM2",
+              "host": ["{{baseUrl}}"],
+              "path": ["CodeSystem"],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "ICD11-TM2"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Read ICD-11 TM2 CodeSystem",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/CodeSystem/{{icd11Tm2Id}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["CodeSystem", "{{icd11Tm2Id}}"]
+            }
+          }
+        },
+        {
+          "name": "$lookup TM26.0",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"parameter\": [\n    {\n      \"name\": \"code\",\n      \"valueCode\": \"TM26.0\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/CodeSystem/{{icd11Tm2Id}}/$lookup",
+              "host": ["{{baseUrl}}"],
+              "path": ["CodeSystem", "{{icd11Tm2Id}}", "$lookup"]
+            }
+          }
+        },
+        {
+          "name": "$validate-code TM26.0",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"parameter\": [\n    {\n      \"name\": \"code\",\n      \"valueCode\": \"TM26.0\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/CodeSystem/{{icd11Tm2Id}}/$validate-code",
+              "host": ["{{baseUrl}}"],
+              "path": ["CodeSystem", "{{icd11Tm2Id}}", "$validate-code"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "ConceptMap",
+      "item": [
+        {
+          "name": "Search ConceptMaps",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ConceptMap",
+              "host": ["{{baseUrl}}"],
+              "path": ["ConceptMap"]
+            }
+          }
+        },
+        {
+          "name": "$translate SR11 (NAMASTE to ICD-11 TM2)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"parameter\": [\n    {\n      \"name\": \"code\",\n      \"valueCode\": \"SR11\"\n    },\n    {\n      \"name\": \"system\",\n      \"valueUri\": \"https://ayush.gov.in/fhir/CodeSystem/namaste\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ConceptMap/{{namasteToIcdMapId}}/$translate",
+              "host": ["{{baseUrl}}"],
+              "path": ["ConceptMap", "{{namasteToIcdMapId}}", "$translate"]
+            }
+          }
+        },
+        {
+          "name": "$validate SR11 mapping",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"parameter\": [\n    {\n      \"name\": \"source\",\n      \"valueUri\": \"https://ayush.gov.in/fhir/CodeSystem/namaste\"\n    },\n    {\n      \"name\": \"target\",\n      \"valueUri\": \"http://id.who.int/icd/release/11/mms\"\n    },\n    {\n      \"name\": \"concept\",\n      \"valueCoding\": {\n      \"code\": \"SR11\",\n      \"system\": \"https://ayush.gov.in/fhir/CodeSystem/namaste\"\n    }\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ConceptMap/{{namasteToIcdMapId}}/$validate",
+              "host": ["{{baseUrl}}"],
+              "path": ["ConceptMap", "{{namasteToIcdMapId}}", "$validate"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "ValueSet",
+      "item": [
+        {
+          "name": "Search ValueSets",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ValueSet",
+              "host": ["{{baseUrl}}"],
+              "path": ["ValueSet"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Condition",
+      "item": [
+        {
+          "name": "Search Conditions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/Condition",
+              "host": ["{{baseUrl}}"],
+              "path": ["Condition"]
+            }
+          }
+        },
+        {
+          "name": "Create Condition with Dual Coding",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resourceType\": \"Condition\",\n  \"subject\": {\n    \"reference\": \"Patient/example-patient\"\n  },\n  \"code\": {\n    \"coding\": [\n      {\n        \"system\": \"https://ayush.gov.in/fhir/CodeSystem/namaste\",\n        \"code\": \"SR11\",\n        \"display\": \"वातसञ्चयः\"\n      },\n      {\n        \"system\": \"http://id.who.int/icd/release/11/mms\",\n        \"code\": \"TM26.0\",\n        \"display\": \"Disorders of vata dosha\"\n      }\n    ]\n  },\n  \"clinicalStatus\": {\n    \"coding\": [\n      {\n        \"system\": \"http://terminology.hl7.org/CodeSystem/condition-clinical\",\n        \"code\": \"active\"\n      }\n    ]\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/Condition",
+              "host": ["{{baseUrl}}"],
+              "path": ["Condition"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Patient",
+      "item": [
+        {
+          "name": "Search Patients",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/Patient",
+              "host": ["{{baseUrl}}"],
+              "path": ["Patient"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "TM2 Integration Workflow",
+      "item": [
+        {
+          "name": "1. Validate NAMASTE Code",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"parameter\": [\n    {\n      \"name\": \"code\",\n      \"valueCode\": \"SR11\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/CodeSystem/{{namasteId}}/$validate-code",
+              "host": ["{{baseUrl}}"],
+              "path": ["CodeSystem", "{{namasteId}}", "$validate-code"]
+            }
+          }
+        },
+        {
+          "name": "2. Translate to ICD-11 TM2",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"parameter\": [\n    {\n      \"name\": \"code\",\n      \"valueCode\": \"SR11\"\n    },\n    {\n      \"name\": \"system\",\n      \"valueUri\": \"https://ayush.gov.in/fhir/CodeSystem/namaste\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ConceptMap/{{namasteToIcdMapId}}/$translate",
+              "host": ["{{baseUrl}}"],
+              "path": ["ConceptMap", "{{namasteToIcdMapId}}", "$translate"]
+            }
+          }
+        },
+        {
+          "name": "3. Validate ICD-11 TM2 Code",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"parameter\": [\n    {\n      \"name\": \"code\",\n      \"valueCode\": \"TM26.0\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/CodeSystem/{{icd11Tm2Id}}/$validate-code",
+              "host": ["{{baseUrl}}"],
+              "path": ["CodeSystem", "{{icd11Tm2Id}}", "$validate-code"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

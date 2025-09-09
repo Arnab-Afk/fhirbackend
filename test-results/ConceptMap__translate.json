@@ -1,0 +1,14 @@
+{
+  "testName": "ConceptMap_$translate",
+  "timestamp": "2025-09-09T22:19:07.326Z",
+  "status": "success",
+  "response": {
+    "resourceType": "Parameters",
+    "parameter": [
+      {
+        "name": "result",
+        "valueBoolean": false
+      }
+    ]
+  }
+}
