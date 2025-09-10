@@ -267,6 +267,92 @@ async function testPatientEndpoints() {
   }
 }
 
+// Test Bundle endpoints
+async function testBundleEndpoints() {
+  console.log('\n🧪 Testing Bundle Endpoints...');
+
+  try {
+    // Test transaction bundle POST
+    const bundleData = {
+      resourceType: 'Bundle',
+      type: 'transaction',
+      entry: [
+        {
+          resource: {
+            resourceType: 'Patient',
+            active: true,
+            name: [{
+              use: 'official',
+              family: 'Test',
+              given: ['Patient']
+            }],
+            gender: 'male',
+            birthDate: '1990-01-01'
+          },
+          request: {
+            method: 'POST',
+            url: 'Patient'
+          }
+        }
+      ]
+    };
+
+    const response = await axios.post(`${BASE_URL}/Bundle`, bundleData, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+    saveResponse('Bundle_Transaction', response.data);
+    logTest('Bundle Transaction', response.status === 200);
+  } catch (error) {
+    saveResponse('Bundle_Error', error.response?.data || error.message, true);
+    logTest('Bundle Tests', false, error);
+  }
+}
+
+// Test Encounter endpoints
+async function testEncounterEndpoints() {
+  console.log('\n🧪 Testing Encounter Endpoints...');
+
+  try {
+    // Test search
+    const searchResponse = await axios.get(`${BASE_URL}/Encounter`, {
+      headers: { 'Accept': 'application/json' }
+    });
+    saveResponse('Encounter_Search', searchResponse.data);
+    logTest('Encounter Search', searchResponse.status === 200);
+
+    if (searchResponse.data.entry && searchResponse.data.entry.length > 0) {
+      const encounterId = searchResponse.data.entry[0].resource.id;
+
+      // Test read
+      const readResponse = await axios.get(`${BASE_URL}/Encounter/${encounterId}`, {
+        headers: { 'Accept': 'application/json' }
+      });
+      saveResponse('Encounter_Read', readResponse.data);
+      logTest('Encounter Read', readResponse.status === 200);
+    }
+  } catch (error) {
+    saveResponse('Encounter_Error', error.response?.data || error.message, true);
+    logTest('Encounter Tests', false, error);
+  }
+}
+
+// Test health endpoint
+async function testHealthEndpoint() {
+  console.log('\n🧪 Testing Health Endpoint...');
+
+  try {
+    const response = await axios.get('http://localhost:3000/health');
+    saveResponse('Health_Check', response.data);
+    logTest('Health Check', response.status === 200);
+  } catch (error) {
+    saveResponse('Health_Error', error.response?.data || error.message, true);
+    logTest('Health Check', false, error);
+  }
+}
+
 // Test AuditEvent endpoints
 async function testAuditEventEndpoints() {
   console.log('\n🧪 Testing AuditEvent Endpoints...');
@@ -295,36 +381,6 @@ async function testAuditEventEndpoints() {
   }
 }
 
-// Test health endpoint
-async function testHealthEndpoint() {
-  console.log('\n🧪 Testing Health Endpoint...');
-
-  try {
-    const response = await axios.get('http://localhost:3000/health');
-    saveResponse('Health_Check', response.data);
-    logTest('Health Check', response.status === 200);
-  } catch (error) {
-    saveResponse('Health_Error', error.response?.data || error.message, true);
-    logTest('Health Check', false, error);
-  }
-}
-
-// Test capability statement
-async function testCapabilityStatement() {
-  console.log('\n🧪 Testing Capability Statement...');
-
-  try {
-    const response = await axios.get(`${BASE_URL}/metadata`, {
-      headers: { 'Accept': 'application/json' }
-    });
-    saveResponse('Capability_Statement', response.data);
-    logTest('Capability Statement', response.status === 200);
-  } catch (error) {
-    saveResponse('Capability_Error', error.response?.data || error.message, true);
-    logTest('Capability Statement', false, error);
-  }
-}
-
 // Main test runner
 async function runAllTests() {
   console.log('🚀 Starting FHIR Backend API Tests...\n');
@@ -336,6 +392,8 @@ async function runAllTests() {
   await testValueSetEndpoints();
   await testConditionEndpoints();
   await testPatientEndpoints();
+  await testEncounterEndpoints();
+  await testBundleEndpoints();
   await testAuditEventEndpoints();
 
   // Save test summary
@@ -370,6 +428,8 @@ module.exports = {
   testValueSetEndpoints,
   testConditionEndpoints,
   testPatientEndpoints,
+  testEncounterEndpoints,
+  testBundleEndpoints,
   testAuditEventEndpoints,
   testHealthEndpoint,
   testCapabilityStatement

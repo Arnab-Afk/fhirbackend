@@ -179,7 +179,7 @@ router.put('/:id', asyncHandler(async (req, res) => {
       title: valueSetData.title,
       status: valueSetData.status,
       experimental: valueSetData.experimental,
-      date: valueSetData.date ? new Date(valueSetDataData.date) : new Date(),
+      date: valueSetData.date ? new Date(valueSetData.date) : new Date(),
       publisher: valueSetData.publisher,
       description: valueSetData.description,
       compose: valueSetData.compose,

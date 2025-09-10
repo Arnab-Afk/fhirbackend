@@ -11,6 +11,10 @@ const conceptMapRoutes = require('./routes/conceptMap');
 const valueSetRoutes = require('./routes/valueSet');
 const conditionRoutes = require('./routes/condition');
 const patientRoutes = require('./routes/patient');
+const bundleRoutes = require('./routes/bundle');
+const encounterRoutes = require('./routes/encounter');
+const terminologyRoutes = require('./routes/terminology');
+const problemListRoutes = require('./routes/problemList');
 const { router: auditRoutes } = require('./routes/audit');
 
 // Import middleware
@@ -136,20 +140,22 @@ app.get('/fhir/metadata', (req, res) => {
           ]
         },
         {
-          type: 'Patient',
+          type: 'Encounter',
           interaction: [
             { code: 'read' },
             { code: 'search-type' },
             { code: 'create' },
-            { code: 'update' }
+            { code: 'update' },
+            { code: 'delete' }
           ],
           searchParam: [
-            { name: 'identifier', type: 'token' },
-            { name: 'name', type: 'string' },
-            { name: 'gender', type: 'token' },
-            { name: 'birthdate', type: 'date' }
+            { name: 'patient', type: 'reference' },
+            { name: 'status', type: 'token' },
+            { name: 'class', type: 'token' },
+            { name: 'type', type: 'token' },
+            { name: 'date', type: 'date' }
           ]
-        }
+        },
       ]
     }]
   });
@@ -161,6 +167,10 @@ app.use('/fhir/ConceptMap', conceptMapRoutes);
 app.use('/fhir/ValueSet', valueSetRoutes);
 app.use('/fhir/Condition', conditionRoutes);
 app.use('/fhir/Patient', patientRoutes);
+app.use('/fhir/Bundle', bundleRoutes);
+app.use('/fhir/Encounter', encounterRoutes);
+app.use('/fhir/terminology', terminologyRoutes);
+app.use('/fhir/problem-list', problemListRoutes);
 app.use('/fhir/AuditEvent', auditRoutes);
 
 // Error handling middleware (must be last)

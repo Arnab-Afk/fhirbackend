@@ -1,6 +1,7 @@
 const express = require('express');
 const { asyncHandler, NotFoundError, ValidationError } = require('../middleware/errorHandler');
 const { validateFHIRRequest } = require('../middleware/requestLogger');
+const { authenticateApiKey, authorizeAccess, auditLog } = require('../middleware/auth');
 const { PrismaClient } = require('@prisma/client');
 
 const router = express.Router();
@@ -152,7 +153,7 @@ router.get('/:id', asyncHandler(async (req, res) => {
 /**
  * POST /fhir/CodeSystem - Create CodeSystem
  */
-router.post('/', asyncHandler(async (req, res) => {
+router.post('/', authenticateApiKey, authorizeAccess(['write']), auditLog('CREATE'), asyncHandler(async (req, res) => {
   const codeSystemData = req.body;
 
   // Validate required fields
@@ -248,7 +249,7 @@ router.post('/', asyncHandler(async (req, res) => {
 /**
  * PUT /fhir/CodeSystem/:id - Update CodeSystem
  */
-router.put('/:id', asyncHandler(async (req, res) => {
+router.put('/:id', authenticateApiKey, authorizeAccess(['write']), auditLog('UPDATE'), asyncHandler(async (req, res) => {
   const { id } = req.params;
   const codeSystemData = req.body;
 
@@ -328,7 +329,7 @@ router.put('/:id', asyncHandler(async (req, res) => {
 /**
  * DELETE /fhir/CodeSystem/:id - Delete CodeSystem
  */
-router.delete('/:id', asyncHandler(async (req, res) => {
+router.delete('/:id', authenticateApiKey, authorizeAccess(['write']), auditLog('DELETE'), asyncHandler(async (req, res) => {
   const { id } = req.params;
 
   // Check if CodeSystem exists
@@ -579,5 +580,152 @@ router.post('/:id/$validate-code', asyncHandler(async (req, res) => {
     parameter: parameters
   });
 }));
+
+/**
+ * GET /fhir/CodeSystem/$autocomplete - Auto-complete search for codes
+ */
+router.get('/$autocomplete', asyncHandler(async (req, res) => {
+  const {
+    system,
+    search,
+    limit = 10,
+    includeDesignations = true
+  } = req.query;
+
+  if (!system) {
+    throw new ValidationError('system parameter is required');
+  }
+
+  if (!search || search.length < 2) {
+    throw new ValidationError('search parameter must be at least 2 characters');
+  }
+
+  // Find the CodeSystem
+  const codeSystem = await prisma.codeSystem.findUnique({
+    where: { url: system },
+    include: {
+      concepts: {
+        where: {
+          OR: [
+            { code: { contains: search, mode: 'insensitive' } },
+            { display: { contains: search, mode: 'insensitive' } },
+            ...(includeDesignations ? [{
+              designations: {
+                some: {
+                  value: { contains: search, mode: 'insensitive' }
+                }
+              }
+            }] : [])
+          ]
+        },
+        include: {
+          designations: includeDesignations
+        },
+        take: parseInt(limit),
+        orderBy: [
+          { display: 'asc' },
+          { code: 'asc' }
+        ]
+      }
+    }
+  });
+
+  if (!codeSystem) {
+    throw new NotFoundError('CodeSystem', system);
+  }
+
+  // Format results
+  const results = codeSystem.concepts.map(concept => ({
+    code: concept.code,
+    display: concept.display,
+    system: codeSystem.url,
+    version: codeSystem.version,
+    ...(includeDesignations && concept.designations.length > 0 && {
+      designation: concept.designations.map(d => ({
+        language: d.language,
+        value: d.value,
+        use: d.use
+      }))
+    })
+  }));
+
+  res.json({
+    resourceType: 'Parameters',
+    parameter: [
+      {
+        name: 'result',
+        valueBoolean: results.length > 0
+      },
+      {
+        name: 'matches',
+        valueInteger: results.length
+      },
+      ...results.map((result, index) => ({
+        name: 'match',
+        part: [
+          {
+            name: 'index',
+            valueInteger: index
+          },
+          {
+            name: 'code',
+            valueCoding: {
+              system: result.system,
+              code: result.code,
+              display: result.display,
+              version: result.version
+            }
+          },
+          ...(result.designation ? [{
+            name: 'designation',
+            valueString: result.designation.map(d => `${d.language}: ${d.value}`).join('; ')
+          }] : [])
+        ]
+      }))
+    ]
+  });
+}));
+
+/**
+ * Helper function to recursively create concepts and their hierarchy
+ */
+async function createConceptRecursive(codeSystemId, concept) {
+  const createdConcept = await prisma.codeSystemConcept.create({
+    data: {
+      code: concept.code,
+      display: concept.display,
+      definition: concept.definition,
+      codeSystemId: codeSystemId
+    }
+  });
+
+  // Create designations if provided
+  if (concept.designation && Array.isArray(concept.designation)) {
+    for (const designation of concept.designation) {
+      await prisma.codeSystemDesignation.create({
+        data: {
+          language: designation.language,
+          value: designation.value,
+          use: designation.use,
+          conceptId: createdConcept.id
+        }
+      });
+    }
+  }
+
+  // Create child concepts recursively
+  if (concept.concept && Array.isArray(concept.concept)) {
+    for (const childConcept of concept.concept) {
+      const child = await createConceptRecursive(codeSystemId, childConcept);
+      // Update parent relationship
+      await prisma.codeSystemConcept.update({
+        where: { id: child.id },
+        data: { parentId: createdConcept.id }
+      });
+    }
+  }
+
+  return createdConcept;
+}
 
 module.exports = router;

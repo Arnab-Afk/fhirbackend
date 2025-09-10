@@ -88,7 +88,7 @@ AyushBridge is a lightweight terminology microservice that bridges NAMASTE codes
 - **Confidence Scoring**: Mapping quality indicators
 
 ### 🔐 Security & Compliance
-- **ABHA Authentication**: OAuth 2.0 integration with India's health ID
+- **JWT & API Key Authentication**: Token-based authentication for API access
 - **Role-Based Access**: Clinician, administrator, and audit roles
 - **Audit Trails**: Comprehensive logging for all operations
 - **Data Privacy**: GDPR and Indian data protection compliance
@@ -108,10 +108,9 @@ AyushBridge is a lightweight terminology microservice that bridges NAMASTE codes
 - **Validation**: FHIR R4 validation engine
 
 ### Database & Storage
-- **Primary DB**: MongoDB / PostgreSQL
-- **Caching**: Redis for performance optimization
-- **Search Engine**: Elasticsearch for advanced terminology search
-- **File Storage**: MinIO / AWS S3 for NAMASTE CSV imports
+- **Primary DB**: PostgreSQL with Prisma ORM
+- **Search**: Full-text search capabilities
+- **File Storage**: Local file system for CSV imports
 
 ### Security & Authentication
 - **OAuth 2.0**: ABHA integration
@@ -171,23 +170,11 @@ NODE_ENV=development
 PORT=3000
 
 # Database Configuration
-DB_TYPE=mongodb
-DB_URI=mongodb://localhost:27017/ayushbridge
-REDIS_URI=redis://localhost:6379
-
-# WHO ICD-11 API Configuration
-ICD11_API_URL=https://id.who.int/icd/release/11
-ICD11_CLIENT_ID=your_client_id
-ICD11_CLIENT_SECRET=your_client_secret
-
-# ABHA OAuth Configuration
-ABHA_AUTH_URL=https://abha.abdm.gov.in/auth
-ABHA_CLIENT_ID=your_abha_client_id
-ABHA_CLIENT_SECRET=your_abha_client_secret
+DB_TYPE=postgresql
+DATABASE_URL=postgresql://username:password@localhost:5432/ayushbridge
 
 # Security
 JWT_SECRET=your_jwt_secret_key
-ENCRYPTION_KEY=your_encryption_key
 
 # Monitoring
 PROMETHEUS_PORT=9090
@@ -229,9 +216,11 @@ Development: http://localhost:3000
 ```
 
 ### Authentication
-All API requests require OAuth 2.0 Bearer token:
+All API requests require JWT Bearer token or API key:
 ```bash
-Authorization: Bearer <ABHA_TOKEN>
+Authorization: Bearer <JWT_TOKEN>
+# OR
+X-API-Key: <API_KEY>
 ```
 
 ### Core Endpoints

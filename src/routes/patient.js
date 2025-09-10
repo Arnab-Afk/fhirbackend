@@ -125,11 +125,16 @@ router.get('/:id', asyncHandler(async (req, res) => {
 router.post('/', asyncHandler(async (req, res) => {
   const patientData = req.body;
 
+  // Validate request body exists
+  if (!patientData) {
+    throw new ValidationError('Request body is required');
+  }
+
   // Create Patient
   const patient = await prisma.patient.create({
     data: {
       active: patientData.active !== false,
-      gender: patientData.gender,
+      gender: patientData.gender || null,
       birthDate: patientData.birthDate ? new Date(patientData.birthDate) : null
     }
   });
